@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/home"></ion-back-button></ion-buttons>
+    <ion-title>Clima actual</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-select label="País" [(ngModel)]="paisSeleccionado" (ionChange)="consultarClima()" placeholder="Selecciona un país">
+      <ion-select-option *ngFor="let pais of paises" [value]="pais">{{ pais.nombre }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-spinner *ngIf="cargando"></ion-spinner>
+  <ion-text color="danger" *ngIf="mensajeError"><p>{{ mensajeError }}</p></ion-text>
+  <app-tarjeta-clima *ngIf="clima as climaActual" [clima]="climaActual"></app-tarjeta-clima>
+</ion-content>
